@@ -1,0 +1,297 @@
+/*=== INDEX e CADASTRO ===*/
+body {
+  font-family: Arial, sans-serif;
+  background-color: #0f071e; 
+  color: #ffffff; /* Texto branco */
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+
+/* Layout centralizado (para página de login) */
+body.centered-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Layout com conteúdo à esquerda (para página de cadastro) */
+body.left-layout {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5%;
+}
+
+/* Container para o conteúdo à esquerda */
+.left-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%; /* Ocupa 40% da largura da tela */
+  padding-top: 5vh; /* Espaço no topo */
+  animation: fadeInLeft 0.8s ease-out;
+
+  z-index: 1;
+  justify-content: center;
+}
+
+/* Logo */
+.logo1 img {
+  width: 120px; /* Tamanho reduzido da logo */
+  display: block;
+  margin: 0 auto 5px;
+  transition: transform 0.3s ease-in-out;
+  animation: fadeInDown 0.6s ease-out;
+  filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.5));
+}
+
+.logo1 img:hover {
+  transform: scale(1.05);
+}
+
+/* Título */
+.titulologin {
+  font-size: 24px;
+  color: #a855f7; /* Roxo vibrante */
+  text-align: center;
+  margin-bottom: 15px;
+  height: auto;
+  animation: fadeInDown 0.7s ease-out;
+  text-shadow: 0 0 10px rgba(168, 85, 247, 0.5); 
+}
+/* Caixa de login/cadastro */
+.login {
+  background-color: rgba(31, 31, 32, 0.7); /* Fundo mais transparente para estilo PS5 */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px rgba(100, 50, 150, 0.4); /* Sombra mais intensa para estilo PS5 */
+  width: 300px;
+  text-align: center;
+  animation: fadeIn 0.8s ease-out;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  backdrop-filter: none !important;
+}
+
+.login:hover {
+  box-shadow: 0px 0px 25px rgba(168, 85, 247, 0.7); /* Sombra mais intensa para estilo PS5 */
+  transform: translateY(-2px);
+}
+
+/* Inputs */
+.login input[type="text"],
+.login input[type="password"] {
+  width: 90%;
+  padding: 10px;
+  margin: 4px 0; /* Reduzido de 8px para 4px */
+  border: 1px solid #a855f7;
+  border-radius: 10px;
+  background-color: rgba(30, 30, 46, 0.7); /* Mais transparente para estilo PS5 */
+  color: #ffffff;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.login input[type="text"]:focus,
+.login input[type="password"]:focus {
+  border-color: #9d4edd;
+  box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.3);
+  transform: translateY(-1px);
+}
+
+.login input[type="text"]::placeholder,
+.login input[type="password"]::placeholder {
+  color: #bbbbbb;
+  transition: opacity 0.3s ease;
+}
+
+.login input[type="text"]:focus::placeholder,
+.login input[type="password"]:focus::placeholder {
+  opacity: 0.7;
+}
+
+/* Botão */
+.login input[type="submit"] {
+  background-color: #a855f7;
+  color: white;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  margin-top: 8px; /* Reduzido de 10px para 8px */
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.5); /* Adicionado para estilo PS5 */
+}
+
+.login input[type="submit"]:hover {
+  background-color: #9d4edd; /* Tom mais escuro de roxo */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.7); /* Sombra mais intensa para estilo PS5 */
+}
+
+.login input[type="submit"]:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Efeito de onda ao clicar no botão */
+.login input[type="submit"]::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  transform: scale(10, 10);
+  opacity: 0;
+  transition: transform .5s, opacity 1s;
+}
+
+.login input[type="submit"]:active::after {
+  transform: scale(0, 0);
+  opacity: 0.3;
+  transition: 0s;
+}
+
+/* Link para alternar entre login e cadastro */
+.login-link {
+  margin-top: 10px; /* Reduzido de 15px para 10px */
+  font-size: 14px;
+  color: #bbbbbb;
+  animation: fadeIn 1s ease-out;
+}
+
+.login-link a {
+  color: #ffffff; /* Alterado para branco */
+  text-decoration: none;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+  position: relative;
+}
+
+.login-link a:hover {
+  color: #a855f7;
+  text-shadow: 0 0 5px rgba(168, 85, 247, 0.5);
+}
+
+/* Animação de sublinhado para links */
+.login-link a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: #a855f7;
+  transition: width 0.3s ease;
+}
+
+.login-link a:hover::after {
+  width: 100%;
+}
+
+/* Mensagem de erro */
+.error-message {
+  color: #ff6b6b;
+  margin-bottom: 10px;
+  font-size: 14px;
+  animation: shake 0.5s ease-in-out;
+  text-shadow: 0 0 5px rgba(255, 107, 107, 0.5); /* Adicionado para estilo PS5 */
+}
+
+/* Animações */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-5px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(5px);
+  }
+}
+
+/* Animação de página */
+.page-transition {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  body.left-layout {
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+  }
+
+  .left-content {
+    width: 100%;
+    padding: 20px;
+    justify-content: flex-start; /* Alinha ao topo */
+    padding-top: 50px; /* Espaçamento do topo */
+  }
+
+  .right-content {
+    display: none; /* Oculta o espaço para imagem em telas pequenas */
+  }
+
+  .login {
+    width: 90%;
+    max-width: 300px;
+  }
+}
+
+/* Remover fundo-ondas já que temos a animação de partículas */
+.fundo-ondas {
+  display: none;
+}

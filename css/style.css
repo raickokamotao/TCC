@@ -1,0 +1,637 @@
+:root {
+  --primary-color: #a855f7; /* Roxo vibrante */
+  --primary-dark: #9d4edd; /* Roxo mais escuro */
+  --secondary-color: #7b2cbf; /* Roxo secundário */
+  --text-color: #ffffff; /* Texto branco */
+  --light-text: #d3d3d3; /* Texto cinza claro */
+  --background: #121212; /* Fundo preto */
+  --sidebar-bg: #1e1e1e; /* Sidebar cinza escuro */
+  --card-bg: #2c2c2c; /* Fundo de cartões cinza médio */
+  --border-color: #3a3a3a; /* Cor de borda cinza escuro */
+  --shadow-color: rgba(0, 0, 0, 0.3); /* Sombra mais escura */
+  --animation-speed: 15s;
+  --wave-height: 40px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  color: var(--text-color);
+  background-color: #0a0514; /* Even darker purple background for better contrast with dark particles */
+  overflow: hidden;
+  position: relative;
+  height: 100vh;
+}
+
+/* Particles canvas styling */
+#particles-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Layout principal */
+.container {
+  display: flex;
+  height: 100vh;
+  backdrop-filter: blur(5px);
+  position: relative;
+  z-index: 1;
+}
+
+.sidebar {
+  width: 280px;
+  background-color: rgb(23, 4, 43); /* More transparent for PS5 style */
+  border-right: 1px solid var(--border-color);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(10px); /* Increased blur for PS5 style */
+  transition: all 0.3s ease;
+}
+
+.sidebar h3 {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  color: var(--light-text);
+  font-weight: 600;
+}
+
+.history-list {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 1.5rem;
+}
+
+.history-item {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0.2rem;
+  background-color: rgba(44, 44, 44, 0.6); /* More transparent for PS5 style */
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.history-item:hover {
+  background-color: rgba(168, 85, 247, 0.2); /* More transparent for PS5 style */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  border-color: var(--primary-color);
+}
+
+.history-name {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.history-status {
+  font-size: 0.75rem;
+  color: var(--light-text);
+  margin-top: 0.25rem;
+}
+
+.history-status.concluído {
+  color: #10b981; /* Mantendo verde para status concluído */
+}
+
+.nova-analise {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.nova-analise:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.nova-analise span {
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.principal {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(10, 5, 20, 0.5); /* More transparent for PS5 style */
+  backdrop-filter: blur(5px);
+}
+
+.topo {
+  height: 64px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  background-color: rgba(30, 15, 40, 0.7); /* More transparent for PS5 style */
+  backdrop-filter: blur(10px); /* Increased blur for PS5 style */
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-container img {
+  height: 32px;
+  margin-right: 0.75rem;
+}
+
+.logo-container h1 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.user-controls {
+  display: flex;
+  align-items: center;
+}
+
+.notifications {
+  position: relative;
+  margin-right: 1.5rem;
+  cursor: pointer;
+}
+
+.notification-icon {
+  font-size: 1.25rem;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #ef4444;
+  color: white;
+  font-size: 0.7rem;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.perfil-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  font-weight: 600;
+  z-index: 20;
+}
+
+.user-initial {
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 180px;
+  background-color: rgba(44, 44, 44, 0.9); /* More transparent for PS5 style */
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  padding: 0.5rem 0;
+  margin-top: 0.5rem;
+  display: none;
+  z-index: 30;
+  border: 1px solid var(--border-color);
+  transition: none;
+  backdrop-filter: blur(10px); /* Increased blur for PS5 style */
+}
+
+.perfil-btn:hover .profile-dropdown {
+  display: none;
+}
+
+.profile-dropdown.active {
+  display: block;
+}
+
+.profile-dropdown.active:hover {
+  display: block;
+}
+
+.profile-dropdown a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.profile-dropdown a:hover {
+  background-color: rgba(168, 85, 247, 0.2); /* More transparent for PS5 style */
+}
+
+.conteudo {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+.welcome-message {
+  text-align: center;
+  margin-bottom: 2rem;
+  max-width: 600px;
+}
+
+.welcome-message h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+
+.welcome-message p {
+  color: var(--light-text);
+  font-size: 1rem;
+}
+
+.btn-central {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  border-radius: 1rem;
+  background-color: rgba(44, 44, 44, 0.6); /* More transparent for PS5 style */
+  border: 2px dashed var(--border-color);
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 500px;
+  backdrop-filter: blur(5px); /* Added blur for PS5 style */
+}
+
+.btn-central:hover {
+  border-color: var(--primary-color);
+}
+
+.add-btn {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 2rem;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.add-btn:hover {
+  background-color: var(--primary-dark);
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.btn-central p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+}
+
+.file-types {
+  font-size: 0.8rem;
+  color: var(--light-text);
+}
+
+.arquivo-info {
+  width: 100%;
+  max-width: 500px;
+  background-color: rgba(44, 44, 44, 0.6); /* More transparent for PS5 style */
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(5px); /* Added blur for PS5 style */
+}
+
+.arquivo-preview {
+  display: flex;
+  align-items: center;
+}
+
+.preview-icon {
+  font-size: 2rem;
+  margin-right: 1rem;
+}
+
+.preview-details h4 {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+  color: var(--text-color);
+}
+
+.preview-details p {
+  font-size: 0.8rem;
+  color: var(--light-text);
+}
+
+.remover-btn {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.remover-btn:hover {
+  background-color: rgba(239, 68, 68, 0.3);
+}
+
+.resultado-analise {
+  width: 100%;
+  max-width: 800px;
+  background-color: rgba(44, 44, 44, 0.6); /* More transparent for PS5 style */
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-top: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(5px); /* Added blur for PS5 style */
+}
+
+.footer {
+  min-height: 80px;
+  height: auto;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  align-items: flex-start;
+  padding: 1rem 1.5rem;
+  background-color: rgba(30, 15, 40, 0.7); /* More transparent for PS5 style */
+  backdrop-filter: blur(10px); /* Increased blur for PS5 style */
+  gap: 0.75rem;
+}
+
+/* Estilo do textarea no footer */
+.footer textarea {
+  flex: 1;
+  min-height: 48px;
+  max-height: 120px;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  background-color: rgba(44, 44, 44, 0.6); /* More transparent for PS5 style */
+  color: var(--text-color);
+  transition: all 0.2s ease;
+  resize: none;
+  overflow-y: auto;
+  font-family: "Inter", sans-serif;
+  line-height: 1.5;
+}
+
+.footer textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.2);
+}
+
+.footer textarea::placeholder {
+  color: var(--light-text);
+}
+
+/* Estilizando a barra de rolagem do textarea */
+.footer textarea::-webkit-scrollbar {
+  width: 6px;
+}
+
+.footer textarea::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+.footer textarea::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 3px;
+}
+
+/* Ajustando o botão de enviar para alinhar com o textarea */
+.footer .enviar {
+  align-self: flex-end;
+  margin-bottom: 2px;
+  width: 48px;
+  height: 48px;
+  border-radius: 0.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 1.2rem;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.enviar:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(10, 5, 20, 0.8);
+  backdrop-filter: blur(5px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(168, 85, 247, 0.2);
+  border-radius: 50%;
+  border-top-color: var(--primary-color);
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+.loading-overlay p {
+  color: var(--text-color);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+/* Estilos para análise */
+.analise-stats {
+  margin: 1.5rem 0;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.stat-label {
+  width: 150px;
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+.stat-bar {
+  flex: 1;
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 0 1rem;
+}
+
+.stat-fill {
+  height: 100%;
+  background-color: var(--primary-color);
+  border-radius: 4px;
+  transition: width 1s ease-in-out;
+}
+
+.stat-value {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.recomendacao {
+  background-color: rgba(168, 85, 247, 0.1);
+  border-left: 4px solid var(--primary-color);
+  padding: 1rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  margin-top: 1.5rem;
+}
+
+.recomendacao h4 {
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+.break-line {
+  width: 300px;           /* largura máxima */
+  white-space: normal;    /* permite quebras automáticas */
+  word-wrap: break-word;  /* quebra palavras longas */
+  overflow-wrap: break-word;
+}
+/* Hide the original wave animation completely */
+.animated-background,
+.wave,
+.fundo-ondas {
+  display: none !important;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem;
+  }
+
+  .topo {
+    height: 56px;
+    padding: 0 1rem;
+  }
+
+  .conteudo {
+    padding: 1.5rem 1rem;
+  }
+
+  .btn-central {
+    padding: 2rem 1rem;
+  }
+
+  .add-btn {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+
+  .footer {
+    padding: 0.75rem 1rem;
+  }
+
+  .footer textarea {
+    min-height: 40px;
+  }
+
+  .footer .enviar {
+    width: 40px;
+    height: 40px;
+  }
+}
